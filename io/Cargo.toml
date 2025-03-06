@@ -1,6 +1,6 @@
 [package]
 name = "bitcoin-io"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Matt Corallo <birchneutea@mattcorallo.com>"]
 license = "CC0-1.0"
 repository = "https://github.com/rust-bitcoin/rust-bitcoin"
@@ -19,12 +19,12 @@ std = ["alloc", "hashes?/std"]
 alloc = ["hashes?/alloc"]
 
 [dependencies]
-internals = { package = "bitcoin-internals", version = "0.4.0" }
+internals = { package = "bitcoin-internals", version = "0.5.0" }
 
-hashes = { package = "bitcoin_hashes", version = "0.16.0", default-features = false, optional = true }
+hashes = { package = "bitcoin_hashes", version = "1.0.0-alpha.0", default-features = false, optional = true }
 
 [dev-dependencies]
-hashes = { package = "bitcoin_hashes", version = "0.16.0", default-features = false, features = ["hex"] }
+hashes = { package = "bitcoin_hashes", version = "1.0.0-alpha.0", default-features = false, features = ["hex"] }
 
 [package.metadata.docs.rs]
 all-features = true

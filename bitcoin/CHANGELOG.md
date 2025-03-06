@@ -1,22 +1,11 @@
-# Unreleased
+# 0.33.0-alpha.0 - TODO
 
-- TODO: Make a comment about `Amount::MAX_MONEY` (perhaps here in `bitcoin` release notes as well as in `amount`)
+This series of alpha releases is meant to enable down stream testing,
+especially of the 1.0 releases of:
 
-- Use MAX_MONEY in serde regression test [#3950](https://github.com/rust-bitcoin/rust-bitcoin/pull/3950)
-
-# 0.33.0-alpha.0 - 2024-11-18
-
-This series of alpha releases is meant for two things:
-
-1. To facilitate testing of `primitives 0.101`.
-2. To allow testing of upcoming `1.0` releases of:
-
-   - `bitcoin_hashes`
    - `hex`
-   - `bitcoin-io`
    - `primitives`
    - `units`
-   - `ordered`
 
 You likely want to explicitly set the version if doing testing. `cargo` can be surprising when there
 is a `-` in the version number.

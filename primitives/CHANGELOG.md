@@ -1,3 +1,7 @@
+# 1.0.0 - TODO
+
+This changelog is a rolling description of everything that will eventually end up in `v1.0`.
+
 # 0.101.0 - 2024-11-15
 
 This is the first "real" release of the `primitives` crate, as such it
