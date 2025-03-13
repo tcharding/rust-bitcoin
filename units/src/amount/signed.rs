@@ -152,10 +152,8 @@ impl SignedAmount {
     #[allow(clippy::missing_panics_doc)]
     pub const fn from_int_btc_const(whole_bitcoin: i32) -> Result<SignedAmount, OutOfRangeError> {
         let btc = whole_bitcoin as i64; // Can't call `into` in const context.
-        match btc.checked_mul(100_000_000) {
-            Some(amount) => SignedAmount::from_sat(amount),
-            None => panic!("cannot overflow in i64"),
-        }
+        let amount = btc * 100_000_000;
+        SignedAmount::from_sat(amount)
     }
 
     /// Parses a decimal string as a value in the given [`Denomination`].
