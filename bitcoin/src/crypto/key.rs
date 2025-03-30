@@ -527,17 +527,13 @@ impl PrivateKey {
             }
         };
 
-        Ok(PrivateKey {
-            compressed,
-            network,
-            inner: secp256k1::SecretKey::from_byte_array(key)?,
-        })
+        Ok(PrivateKey { compressed, network, inner: secp256k1::SecretKey::from_byte_array(key)? })
     }
 
     /// Returns a new private key with the negated secret value.
     ///
     /// The resulting key corresponds to the same x-only public key (identical x-coordinate)
-    /// but with the opposite y-coordinate parity. This is useful for ensuring compatibility 
+    /// but with the opposite y-coordinate parity. This is useful for ensuring compatibility
     /// with specific public key formats and BIP-340 requirements.
     #[inline]
     pub fn negate(&self) -> Self {
