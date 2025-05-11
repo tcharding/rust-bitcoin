@@ -239,7 +239,7 @@ impl LockTime {
     /// # use bitcoin_primitives::absolute;
     /// // Can be implemented if block chain data is available.
     /// fn get_height() -> absolute::Height { todo!("return the current block height") }
-    /// fn get_time() -> absolute::MedianTimePast { todo!("return the current block time") }
+    /// fn get_time() -> absolute::MedianTimePast { todo!("return the current block MTP") }
     ///
     /// let n = absolute::LockTime::from_consensus(741521); // `n OP_CHEKCLOCKTIMEVERIFY`.
     /// if n.is_satisfied_by(get_height(), get_time()) {
@@ -251,7 +251,7 @@ impl LockTime {
         use LockTime as L;
 
         match self {
-            L::Blocks(n) => n <= height,
+            L::Blocks(n) => n <= height + 1,
             L::Seconds(n) => n <= time,
         }
     }
