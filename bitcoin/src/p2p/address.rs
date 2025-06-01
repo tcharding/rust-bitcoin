@@ -138,7 +138,6 @@ pub enum AddrV2 {
     Unknown(u8, Vec<u8>),
 }
 
-
 impl TryFrom<AddrV2> for IpAddr {
     type Error = AddrV2ToIpAddrError;
 
