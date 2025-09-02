@@ -778,4 +778,30 @@ mod tests {
         let version = Version(123);
         assert_eq!(format!("{}", version), "123");
     }
+
+    // Creates an arbitrary dummy outpoint.
+    #[cfg(feature = "serde")]
+    fn out_point() -> OutPoint {
+        "0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20:1"
+            .parse::<OutPoint>()
+            .unwrap()
+    }
+
+    #[test]
+    #[cfg(feature = "serde")]
+    fn out_point_serde_human_readable_rountrips() {
+        let output = out_point();
+        let ser = serde_json::to_string(&output).unwrap();
+        let got = serde_json::from_str::<OutPoint>(&ser).unwrap();
+        assert_eq!(got, output);
+    }
+
+    #[test]
+    #[cfg(feature = "serde")]
+    fn out_point_serde_non_human_readable_rountrips() {
+        let output = out_point();
+        let ser = bincode::serialize(&output).unwrap();
+        let got = bincode::deserialize::<OutPoint>(&ser).unwrap();
+        assert_eq!(got, output);
+    }
 }
