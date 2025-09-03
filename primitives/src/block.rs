@@ -31,6 +31,10 @@ pub use units::block::{BlockHeight, BlockHeightInterval, BlockMtp, BlockMtpInter
 #[doc(no_inline)]
 pub use units::block::TooBigForRelativeHeightError;
 
+// TODO: Remove this.
+#[doc(inline)]
+pub use crate::hash_types::{BlockHash, WitnessCommitment};
+
 /// Marker for whether or not a block has been validated.
 ///
 /// We define valid as:
@@ -328,25 +332,6 @@ impl Default for Version {
     fn default() -> Version { Self::NO_SOFT_FORK_SIGNALLING }
 }
 
-hashes::hash_newtype! {
-    /// A bitcoin block hash.
-    pub struct BlockHash(sha256d::Hash);
-    /// A hash corresponding to the witness structure commitment in the coinbase transaction.
-    pub struct WitnessCommitment(sha256d::Hash);
-}
-
-#[cfg(feature = "hex")]
-hashes::impl_hex_for_newtype!(BlockHash, WitnessCommitment);
-#[cfg(not(feature = "hex"))]
-hashes::impl_debug_only_for_newtype!(BlockHash, WitnessCommitment);
-#[cfg(feature = "serde")]
-hashes::impl_serde_for_newtype!(BlockHash, WitnessCommitment);
-
-impl BlockHash {
-    /// Dummy hash used as the previous blockhash of the genesis block.
-    pub const GENESIS_PREVIOUS_BLOCK_HASH: Self = Self::from_byte_array([0; 32]);
-}
-
 #[cfg(feature = "arbitrary")]
 #[cfg(feature = "alloc")]
 impl<'a> Arbitrary<'a> for Block {
@@ -354,13 +339,6 @@ impl<'a> Arbitrary<'a> for Block {
         let header = Header::arbitrary(u)?;
         let transactions = Vec::<Transaction>::arbitrary(u)?;
         Ok(Block::new_unchecked(header, transactions))
-    }
-}
-
-#[cfg(feature = "arbitrary")]
-impl<'a> Arbitrary<'a> for BlockHash {
-    fn arbitrary(u: &mut Unstructured<'a>) -> arbitrary::Result<Self> {
-        Ok(BlockHash::from_byte_array(u.arbitrary()?))
     }
 }
 
