@@ -16,14 +16,13 @@ use arbitrary::{Arbitrary, Unstructured};
 use hashes::{sha256d, HashEngine as _};
 use units::BlockTime;
 
-use crate::merkle_tree::TxMerkleNode;
-#[cfg(feature = "alloc")]
-use crate::merkle_tree::WitnessMerkleNode;
-use crate::pow::CompactTarget;
 #[cfg(feature = "alloc")]
 use crate::prelude::Vec;
+use crate::{CompactTarget, TxMerkleNode};
 #[cfg(feature = "alloc")]
-use crate::transaction::Transaction;
+use crate::Transaction;
+#[cfg(feature = "alloc")]
+use crate::WitnessMerkleNode;
 
 #[rustfmt::skip]                // Keep public re-exports separate.
 #[doc(inline)]
